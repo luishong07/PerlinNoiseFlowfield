@@ -5,12 +5,14 @@ class Particle {
         // this.vel = createVector(0,0)
         this.vel = p5.Vector.random2D();
         this.acc = createVector(0, 0);
-        this.maxSpeed = 4
+        this.maxSpeed = 4;
+
+        this.prevPos = this.pos.copy();
     }
 
     update() {
         this.vel.add(this.acc);
-        this.vel.limit(this.maxSpeed)
+        this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
         this.acc.mult(0);
     }
@@ -20,23 +22,42 @@ class Particle {
     }
 
     show() {
-        stroke(0,5);
-        // fill('black')
-        point(this.pos.x, this.pos.y);
+        stroke(0, 5);
+        strokeWeight(2);
+        // point(this.pos.x, this.pos.y);
+        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+        this.updatePrev()
+    }
+
+    updatePrev(){
+        this.prevPos.x = this.pos.x
+        this.prevPos.y = this.pos.y
     }
 
     edges() {
-        if (this.pos.x > width) this.pos.x = 0;
-        if (this.pos.x < 0) this.pos.x = width;
-        if (this.pos.y > height) this.pos.y = 0;
-        if (this.pos.y < 0) this.pos.y = height;
+        if (this.pos.x > width) {
+            this.pos.x = 0;
+            this.updatePrev()
+        }
+        if (this.pos.x < 0) {
+            this.pos.x = width;
+            this.updatePrev()
+        }
+        if (this.pos.y > height) {
+            this.pos.y = 0;
+            this.updatePrev()
+        }
+        if (this.pos.y < 0) {
+            this.pos.y = height;
+            this.updatePrev()
+        }
     }
 
-    follow(flowField){
-        let x = floor(this.pos.x/scale)
-        let y = floor(this.pos.y/scale)
-        let index = x + y * cols
-        let force = flowField[index]
-        this.applyForce(force)
+    follow(flowField) {
+        let x = floor(this.pos.x / scale);
+        let y = floor(this.pos.y / scale);
+        let index = x + y * cols;
+        let force = flowField[index];
+        this.applyForce(force);
     }
 }

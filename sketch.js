@@ -1,5 +1,5 @@
-let increment = 0.5;
-let scale = 10;
+let increment = 5;
+let scale = 25;
 let cols, rows;
 let zOff =0
 let particles = []
@@ -12,11 +12,11 @@ function setup() {
     rows = floor(height / scale);
     // put setup code here
     flowField = new Array(cols*rows)
-	for(let i = 0; i < 50; i++){
+	for(let i = 0; i < 500; i++){
 
 		particles[i]=  new Particle()
 	}
-    background("white");
+    background(255);
 }
 
 
@@ -28,12 +28,6 @@ function draw() {
         for (let x = 0; x < cols; x++) {
             let index = (x + y * cols);
             let angle = noise(xOff, yOff,zOff) * TWO_PI * 2;
-            // if(y == floor(rows/3)){
-            //     angle = -PI/2
-            // }
-            // if(x ==floor(cols/2)){
-            //     angle =0 
-            // }
             let v = p5.Vector.fromAngle(angle);
             // v.setMag(0.1)
             flowField[index] = v
@@ -51,9 +45,9 @@ function draw() {
     }
 	for(let i = 0; i < particles.length;i++){
         particles[i].follow(flowField)
-		particles[i].show()
         particles[i].update()
         particles[i].edges()
+		particles[i].show()
 		// particles[i].applyForce()
 	}
 
