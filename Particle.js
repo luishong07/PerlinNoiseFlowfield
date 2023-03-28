@@ -22,10 +22,10 @@ class Particle {
     }
 
     show() {
-        stroke(0, 5);
-        strokeWeight(2);
-        // point(this.pos.x, this.pos.y);
-        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+        // line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+        stroke(0);
+        strokeWeight(5);
+        point(this.pos.x, this.pos.y);
         this.updatePrev()
     }
 
