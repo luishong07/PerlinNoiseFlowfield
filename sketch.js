@@ -9,6 +9,7 @@ function setup() {
     createCanvas(innerWidth, innerHeight)
     cols = floor(width / scale);
     rows = floor(height / scale);
+    console.log(cols, rows)
     flowField = new Array(cols*rows)
 	for(let i = 0; i < 20; i++){
 
@@ -24,8 +25,12 @@ function draw() {
         let xOff = 0;
         for (let x = 0; x < cols; x++) {
             let index = (x + y * cols);
-            let angle = noise(xOff, yOff,zOff) * TWO_PI ;
-            let v = p5.Vector.fromAngle(angle);
+            // let angle = noise(xOff, yOff,zOff) * TWO_PI ;
+            // if(y ==floor(rows/2)){
+            //     angle = PI/2
+            // }
+            let angle = atan(y/x)
+            let v = p5.Vector.fromAngle(angle+PI/2);
             // v.setMag(0.1)
             flowField[index] = v
             xOff += increment;
@@ -36,11 +41,14 @@ function draw() {
             rotate(v.heading());
             strokeWeight(1)
             line(0, 0, scale, 0);
+            stroke('red')
+            strokeWeight(5)
+            point(scale,0)
             // // ellipse(scale,0, 5,5)
             pop();
         }
         yOff += increment;
-		zOff+=0.002
+		zOff+=0.0005
     }
 	for(let i = 0; i < particles.length;i++){
         particles[i].follow(flowField)
