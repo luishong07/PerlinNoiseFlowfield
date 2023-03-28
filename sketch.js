@@ -40,7 +40,7 @@ function draw() {
             pop();
         }
         yOff += increment;
-		zOff+=0.001
+		zOff+=0.002
     }
 	for(let i = 0; i < particles.length;i++){
         particles[i].follow(flowField)
