@@ -22,11 +22,7 @@ class Particle {
     }
 
     show() {
-<<<<<<< HEAD
-        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
-=======
         // line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
->>>>>>> dadad8ea99e80b7c784782fda7d70c2099802c26
         stroke(0);
         strokeWeight(5);
         point(this.pos.x, this.pos.y);
