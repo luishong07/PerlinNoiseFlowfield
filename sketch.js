@@ -3,6 +3,8 @@ let scale = 50;
 let cols, rows;
 let zOff =0
 let particles = []
+let initialX
+let initialY
 
 let flowField 
 function setup() {
@@ -13,8 +15,14 @@ function setup() {
     flowField = new Array(cols*rows)
 	for(let i = 0; i < 20; i++){
 
-		particles[i]=  new Particle()
+		particles[i]=  new Particle(initialX,initialY)
 	}
+}
+
+function mousePressed(){
+    // console.log(mouseX, mouseY)
+    let p = new Particle(mouseX, mouseY)
+    particles.push(p)
 }
  
 
@@ -25,12 +33,10 @@ function draw() {
         let xOff = 0;
         for (let x = 0; x < cols; x++) {
             let index = (x + y * cols);
-            // let angle = noise(xOff, yOff,zOff) * TWO_PI ;
-            // if(y ==floor(rows/2)){
-            //     angle = PI/2
-            // }
-            let angle = atan(y/x)
-            let v = p5.Vector.fromAngle(angle+PI/2);
+            let angle = noise(xOff, yOff,zOff) * TWO_PI ;
+
+            // let angle = atan(y/x)
+            let v = p5.Vector.fromAngle(angle);
             // v.setMag(0.1)
             flowField[index] = v
             xOff += increment;

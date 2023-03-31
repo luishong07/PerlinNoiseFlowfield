@@ -1,7 +1,11 @@
 class Particle {
-    constructor() {
+    constructor(x, y) {
         // this.pos = createVector(0,0)
-        this.pos = createVector(random(width), random(height));
+        if (x && y) {
+            this.pos = createVector(x, y);
+        } else {
+            this.pos = createVector(random(width), random(height));
+        }
         // this.vel = createVector(0,0)
         this.vel = p5.Vector.random2D();
         this.acc = createVector(0, 0);
@@ -26,30 +30,30 @@ class Particle {
         stroke(0);
         strokeWeight(5);
         point(this.pos.x, this.pos.y);
-        this.updatePrev()
+        this.updatePrev();
     }
 
-    updatePrev(){
-        this.prevPos.x = this.pos.x
-        this.prevPos.y = this.pos.y
+    updatePrev() {
+        this.prevPos.x = this.pos.x;
+        this.prevPos.y = this.pos.y;
     }
 
     edges() {
         if (this.pos.x > width) {
             this.pos.x = 0;
-            this.updatePrev()
+            this.updatePrev();
         }
         if (this.pos.x < 0) {
             this.pos.x = width;
-            this.updatePrev()
+            this.updatePrev();
         }
         if (this.pos.y > height) {
             this.pos.y = 0;
-            this.updatePrev()
+            this.updatePrev();
         }
         if (this.pos.y < 0) {
             this.pos.y = height;
-            this.updatePrev()
+            this.updatePrev();
         }
     }
 
